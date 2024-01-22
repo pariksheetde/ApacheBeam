@@ -1,6 +1,7 @@
-# pip install google-cloud-bigquery
+# BELOW ARE THE LIBRARIES TO BE INSTALLED
 # pip install apache_beam
 # pip install apache_beam[gcp]
+# pip install google-cloud-bigquery
 # Resource : https://medium.com/@bhaveshpatil0078/loading-csv-file-from-gcs-to-bigquery-using-python-9c646d4e884f
 
 from google.cloud import bigquery
