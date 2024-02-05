@@ -59,7 +59,7 @@ def get_csv_reader(readable_file):
 
 def dataflow(argv=None):
     #ile='sample.csv'
-    #table = 'gp-ct-sbox-adv-dna:abcd.test_tabl_sumanta'
+    #table = 'admiral-1409:HR.customer'
     parser = argparse.ArgumentParser()
 
     pipeline_options = PipelineOptions()
