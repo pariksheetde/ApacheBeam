@@ -7,12 +7,11 @@
 # TO AUTHENTICATE GOOGLE BUCKET FROM PYTHON USE BELOW CODE
 # gcloud auth application-default login
 
-import datetime
 import csv
+import datetime
 import logging
 import apache_beam as beam
 from google.cloud import bigquery
-import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
 import argparse
 
@@ -22,8 +21,8 @@ class CSVtoDict(beam.DoFn):
         try:
             if len(element) == len(header):
                 data = {header.strip(): val.strip() for header, val in zip(header, element)}
-                data.update({"load_ts" : datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
-                data.update({"load_user" : "PARIKSHEET"})
+                # data.update({"load_ts" : datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
+                # data.update({"load_user" : "PARIKSHEET"})
                 print(data)
                 return [data]
             else:
@@ -83,4 +82,4 @@ def dataflow(argv=None):
 if __name__=="__main__":
     dataflow()
 
-# python 1.load_customers_BQ.py --project admiral-1409 --region us-central1 --runner DirectRunner --staging_location gs://raw_batch_dataset/staging --temp_location gs://raw_batch_dataset/temp --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --max_num_workers 1 --setup_file ./setup.py --input gs://raw_batch_dataset/customers/customers.csv --output HR.customer
+# python 1.load_customers_BQ.py --project admiral-1409 --region us-central1 --runner DirectRunner --staging_location gs://raw_batch_dataset/staging --temp_location gs://raw_batch_dataset/temp --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --max_num_workers 1 --setup_file ./setup.py --input gs://raw_batch_dataset/customers/customers.csv --output admiral-0409:HR.customer
