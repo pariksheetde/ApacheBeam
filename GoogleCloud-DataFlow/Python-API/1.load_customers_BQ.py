@@ -70,6 +70,7 @@ def dataflow(argv=None):
                         | 'Flatten the CSV' >> beam.FlatMap(get_csv_reader)
                         | 'Converting from csv to dict' >> beam.ParDo(CSVtoDict(),['emp_id','f_name', 'l_name', 'dept_id' ,'joining_date'])
                         | 'Write entities into BigQuery' >> beam.io.WriteToBigQuery(
+                                                                        # schema="SCHEMA_AUTODETECT",
                                                                         my_options.output,
                                                                         schema='emp_id:INTEGER, f_name:STRING , l_name:STRING , dept_id:INTEGER, joining_date:DATE, load_ts:TIMESTAMP, load_user:STRING',
                                                                         write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE,
@@ -82,4 +83,4 @@ def dataflow(argv=None):
 if __name__=="__main__":
     dataflow()
 
-# python 1.load_customers_BQ.py --project admiral-1409 --region us-central1 --runner DirectRunner --staging_location gs://raw_batch_dataset/staging --temp_location gs://raw_batch_dataset/temp --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --max_num_workers 1 --setup_file ./setup.py --input gs://raw_batch_dataset/customers/customers.csv --output admiral-0409:HR.customer
+# python 1.load_customers_BQ.py --project admiral-1409 --region us-central1 --runner DirectRunner --staging_location gs://raw_batch_dataset/staging --temp_location gs://raw_batch_dataset/temp --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --max_num_workers 1 --setup_file ./setup.py --input gs://raw_batch_dataset/customers/customers.csv --output admiral-1409:HR.customer
