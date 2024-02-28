@@ -25,3 +25,6 @@ source_file = open(file_path, "rb")
 job = client.load_table_from_file(source_file, table_id, job_config=job_config)
 
 job.result()
+
+table = client.get_table(table_id)
+print("Loaded {} rows and {} columns to {}".format(table.num_rows, len(table.schema),table_id))
