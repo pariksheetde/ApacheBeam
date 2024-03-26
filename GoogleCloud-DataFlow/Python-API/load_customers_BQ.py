@@ -6,6 +6,7 @@
 # pip install google-cloud-storage
 # TO AUTHENTICATE GOOGLE BUCKET FROM PYTHON USE BELOW CODE
 # gcloud auth application-default login
+# THIS SCRIPT IS USING python 3.8 version
 
 import csv
 import datetime
