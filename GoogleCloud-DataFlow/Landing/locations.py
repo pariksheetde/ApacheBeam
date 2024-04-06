@@ -8,6 +8,12 @@
 # gcloud auth application-default login
 # THIS SCRIPT IS USING python 3.8 version
 
+# AUTHOR : PARIKSHEET DE
+# DATE : 06-APR-2024
+# DESCRIPTION : THIS SCRIPT WILL LOAD CSV FILE FROM GCS BUCKET INTO GOOGLE BIGQUERY
+# METHOD 1 : USING DirectRunner
+# METHOD 2 : USING Dataflow 
+
 import os
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions

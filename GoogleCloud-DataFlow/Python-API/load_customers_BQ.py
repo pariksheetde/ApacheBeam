@@ -8,6 +8,11 @@
 # gcloud auth application-default login
 # THIS SCRIPT IS USING python 3.8 version
 
+# AUTHOR : PARIKSHEET DE
+# DATE : 06-APR-2024
+# DESCRIPTION : THIS SCRIPT WILL LOAD CSV FILE FROM LOCAL DRIVE INTO GOOGLE BIGQUERY
+
+
 from google.cloud import storage
 import time
 from google.cloud import bigquery
