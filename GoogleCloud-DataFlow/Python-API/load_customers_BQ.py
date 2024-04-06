@@ -12,7 +12,6 @@
 # DATE : 06-APR-2024
 # DESCRIPTION : THIS SCRIPT WILL LOAD CSV FILE FROM LOCAL DRIVE INTO GOOGLE BIGQUERY
 
-
 from google.cloud import storage
 import time
 from google.cloud import bigquery
