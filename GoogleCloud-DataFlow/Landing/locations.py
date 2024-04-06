@@ -88,5 +88,6 @@ if __name__=='__main__':
     dataflow()
 
 """
+DirectRunner
 python locations.py --project admiral-1409 --region asia-south1 --runner DirectRunner --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/locations.csv
 """

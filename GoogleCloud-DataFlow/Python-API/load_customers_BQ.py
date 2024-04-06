@@ -38,3 +38,7 @@ job.result()
 
 table = client.get_table(table_id)
 print("Loaded {} rows and {} columns to {}".format(table.num_rows, len(table.schema),table_id))
+
+"""
+python load_customers_BQ.py
+"""
