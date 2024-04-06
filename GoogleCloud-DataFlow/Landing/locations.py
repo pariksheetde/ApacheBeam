@@ -80,4 +80,4 @@ if __name__=='__main__':
     # logging.getLogger().setLevel(logging.info)
     dataflow()
 
-# python locations.py --project admiral-1409 --region us-central1 --runner DirectRunner --temp_location gs://rms-adm/hrms-adm-utility/temp --staging_location gs://hrms-adm/hrms-adm-utility/staging --inputBucket gs://hrms-adm/src/locations.csv
+# python locations.py --project admiral-1409 --region us-central1 --runner DirectRunner --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://rms-adm/hrms-adm-utility/temp --staging_location gs://hrms-adm/hrms-adm-utility/staging --inputBucket gs://hrms-adm/src/locations.csv
