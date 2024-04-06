@@ -17,7 +17,7 @@ from google.cloud import storage
 import time
 from google.cloud import bigquery
 
-SERVICE_ACCOUNT_JSON = r'D:\GoogleCloud\Dataflow\iam_key\admiral-1409-b37ef309cbe2.json'
+SERVICE_ACCOUNT_JSON = r'D:\DataSet\GoogleCloud\Dataflow\iam_key\admiral-1409-b37ef309cbe2.json'
 client = bigquery.Client.from_service_account_json(SERVICE_ACCOUNT_JSON)
 
 table_id = "admiral-1409.HRMS.customers"
@@ -35,7 +35,7 @@ sql_qry = """
 """
 qry_job = client.query(sql_qry)
 
-file_path = r'D:\GoogleCloud\Dataflow\dataset\customers.csv'
+file_path = r'D:\DataSet\GoogleCloud\Dataflow\dataset\customers.csv'
 source_file = open(file_path, "rb")
 job = client.load_table_from_file(source_file, table_id, job_config=job_config)
 
