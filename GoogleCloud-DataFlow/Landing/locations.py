@@ -14,7 +14,12 @@ from apache_beam.io import WriteToBigQuery
 import argparse
 import csv
 import datetime
+from google.cloud import storage
+from google.cloud import bigquery
 import logging
+
+SERVICE_ACCOUNT_JSON = r'D:\GoogleCloud\Dataflow\iam_key\admiral-1409-b37ef309cbe2.json'
+client = bigquery.Client.from_service_account_json(SERVICE_ACCOUNT_JSON)
 
 def _logging(elem):
     logging.info(elem)
@@ -80,4 +85,4 @@ if __name__=='__main__':
     # logging.getLogger().setLevel(logging.info)
     dataflow()
 
-# python locations.py --project admiral-1409 --region us-central1 --runner DirectRunner --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://rms-adm/hrms-adm-utility/temp --staging_location gs://hrms-adm/hrms-adm-utility/staging --inputBucket gs://hrms-adm/src/locations.csv
+# python locations.py --project admiral-1409 --region us-central1 --runner DirectRunner --service_account_email dataflow-bigquery@admiral-1409.iam.gserviceaccount.com --temp_location gs://rms-adm/hrms-adm-utility/temp --staging_location gs://hrms-adm/hrms-adm-utility/staging --inputBucket gs://hrms-adm/src/locations.csv
