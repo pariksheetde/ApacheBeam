@@ -8,80 +8,33 @@
 # gcloud auth application-default login
 # THIS SCRIPT IS USING python 3.8 version
 
-import csv
-import datetime
-import logging
-import apache_beam as beam
+from google.cloud import storage
+import time
 from google.cloud import bigquery
-from apache_beam.options.pipeline_options import PipelineOptions
-import argparse
 
-class CSVtoDict(beam.DoFn):
-    """Converts line into dictionary"""
-    def process(self, element, header):
-        try:
-            if len(element) == len(header):
-                data = {header.strip(): val.strip() for header, val in zip(header, element)}
-                data.update({"load_ts" : datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
-                data.update({"load_user" : "PARIKSHEET"})
-                print(data)
-                return [data]
-            else:
-                logging.info("row contains bad data")
-        except Exception as e:
-            print(str(e))
+SERVICE_ACCOUNT_JSON = r'D:\GoogleCloud\Dataflow\iam_key\admiral-1409-b37ef309cbe2.json'
+client = bigquery.Client.from_service_account_json(SERVICE_ACCOUNT_JSON)
 
-class MyOptions(PipelineOptions):
-    @classmethod
-    def _add_argparse_args(cls, parser):
-        parser.add_argument(
-                '--input',
-                dest='input',
-                type=str,
-                default='',
-                required=True,
-                help='Input file to read. This can be a local file or a file in a Google Storage Bucket.')
-        parser.add_argument(
-                '--output',
-                dest='output',
-                type=str,
-                default='',
-                required=True,
-                help='Output Big Query table where the data stored.')
-        
-def get_csv_reader(readable_file):
-    import io
-    # Open a channel to read the file from GCS
-    gcs_file = beam.io.filesystems.FileSystems.open(readable_file)
-    gcs_reader = csv.reader(io.TextIOWrapper(gcs_file))
-    next(gcs_reader)
-    print(gcs_reader)
-    return gcs_reader
+table_id = "admiral-1409.HRMS.customers"
 
-def dataflow(argv=None):
-    #ile='sample.csv'
-    #table = 'admiral-1409:HR.customer'
-    parser = argparse.ArgumentParser()
+job_config = bigquery.LoadJobConfig(
+    schema=[
+        bigquery.SchemaField("CustomerId", "INTEGER", mode="REQUIRED"),
+        bigquery.SchemaField("CustomerName", "STRING", mode="REQUIRED"),
+    ],
+    source_format=bigquery.SourceFormat.CSV, skip_leading_rows =1, autodetect=True
+)
 
-    pipeline_options = PipelineOptions()
-    my_options = pipeline_options.view_as(MyOptions)
-    p = beam.Pipeline(options=pipeline_options)
+sql_qry = """
+        TRUNCATE TABLE admiral-1409.HRMS.customers
+"""
+qry_job = client.query(sql_qry)
 
-    result = (p | 'Create from CSV' >> beam.Create([my_options.input])
-                        | 'Flatten the CSV' >> beam.FlatMap(get_csv_reader)
-                        | 'Converting from csv to dict' >> beam.ParDo(CSVtoDict(),['emp_id','f_name', 'l_name', 'dept_id' ,'joining_date'])
-                        | 'Write entities into BigQuery' >> beam.io.WriteToBigQuery(
-                                                                        # schema="SCHEMA_AUTODETECT",
-                                                                        my_options.output,
-                                                                        schema='emp_id:INTEGER, f_name:STRING , l_name:STRING , dept_id:INTEGER, joining_date:DATE, load_ts:TIMESTAMP, load_user:STRING',
-                                                                        write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE,
-                                                                        create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
-                                                                        )
-            )
+file_path = r'D:\GoogleCloud\Dataflow\dataset\customers.csv'
+source_file = open(file_path, "rb")
+job = client.load_table_from_file(source_file, table_id, job_config=job_config)
 
-    p.run()
+job.result()
 
-if __name__=="__main__":
-    dataflow()
-
-# python 1.load_customers_BQ.py --project admiral-1409 --region us-central1 --runner DirectRunner --staging_location gs://raw_batch_dataset/staging --temp_location gs://raw_batch_dataset/temp --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --max_num_workers 1 --setup_file ./setup.py --input gs://raw_batch_dataset/customers/customers.csv --output admiral-1409:HR.customer
+table = client.get_table(table_id)
+print("Loaded {} rows and {} columns to {}".format(table.num_rows, len(table.schema),table_id))

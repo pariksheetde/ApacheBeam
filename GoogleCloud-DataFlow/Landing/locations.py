@@ -35,8 +35,8 @@ class CSVtoDict(beam.DoFn):
             logging.info(len(element))
             if len(element) == len(header):
                 data = {header.strip(): val.strip() for header, val in zip(header, element)}
-                data.update({"load_ts": datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
-                data.update({"user": "ORACLE"})
+                data.update({"LoadTS": datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
+                data.update({"User": "ORACLE"})
                 logging.info(str(data))
                 print(data)
                 return[data]
@@ -75,9 +75,9 @@ def dataflow(argv=None):
     results = (pl
                 | 'Create From CSV' >> beam.io.ReadFromText(my_options.inputBucket, skip_header_lines=1)
                 | 'Print' >> beam.Map(_logging)
-                | 'Converting From CSV to Dict' >> beam.ParDo(CSVtoDict(), ['location_id', 'location_name'])
+                | 'Converting From CSV to Dict' >> beam.ParDo(CSVtoDict(), ['LocationId', 'LocationName'])
                 | 'Write To BQ' >> beam.io.WriteToBigQuery('admiral-1409:HRMS.locations',
-                                                            schema = 'location_id:INTEGER, location_name:STRING, load_ts:TIMESTAMP, user:STRING',
+                                                            schema = 'LocationId:INTEGER, LocationName:STRING, LoadTS:TIMESTAMP, User:STRING',
                                                             write_disposition= beam.io.BigQueryDisposition.WRITE_TRUNCATE,
                                                             create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED)
                  )
