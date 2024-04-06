@@ -20,7 +20,7 @@ from google.cloud import bigquery
 import logging
 
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'D:\GoogleCloud\Dataflow\iam_key\admiral-1409-b37ef309cbe2.json'
+# os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'D:\GoogleCloud\Dataflow\iam_key\admiral-1409-b37ef309cbe2.json'
 
 
 def _logging(elem):
@@ -35,8 +35,8 @@ class CSVtoDict(beam.DoFn):
             logging.info(len(element))
             if len(element) == len(header):
                 data = {header.strip(): val.strip() for header, val in zip(header, element)}
-                data.update({"LoadTime": datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
-                data.update({"SourceSystem": "ORACLE"})
+                data.update({"load_ts": datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
+                data.update({"user": "ORACLE"})
                 logging.info(str(data))
                 print(data)
                 return[data]
@@ -76,7 +76,7 @@ def dataflow(argv=None):
                 | 'Create From CSV' >> beam.io.ReadFromText(my_options.inputBucket, skip_header_lines=1)
                 | 'Print' >> beam.Map(_logging)
                 | 'Converting From CSV to Dict' >> beam.ParDo(CSVtoDict(), ['location_id', 'location_name'])
-                | 'Write To BQ' >> beam.io.WriteToBigQuery('admiral-1409:HR.locations',
+                | 'Write To BQ' >> beam.io.WriteToBigQuery('admiral-1409:HRMS.locations',
                                                             schema = 'location_id:INTEGER, location_name:STRING, load_ts:TIMESTAMP, user:STRING',
                                                             write_disposition= beam.io.BigQueryDisposition.WRITE_TRUNCATE,
                                                             create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED)
@@ -88,5 +88,5 @@ if __name__=='__main__':
     dataflow()
 
 """
-python locations.py --project admiral-1409 --region asia-south1 --runner DirectRunner --service_account_email load-bq-tables@admiral-1409.iam.gserviceaccount.com --temp_location gs://rms-adm/hrms-adm-utility/temp --staging_location gs://hrms-adm/hrms-adm-utility/staging --inputBucket gs://hrms-adm/src/locations.csv
+python locations.py --project admiral-1409 --region asia-south1 --runner DirectRunner --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/locations.csv
 """
