@@ -27,8 +27,8 @@ playlist_url = "https://www.youtube.com/playlist?list=PLMWaZteqtEaLacN3eS3s8pw2j
 download_playlist(playlist_url)
 
 
-# 1. https://www.youtube.com/playlist?list=PLMWaZteqtEaLTJffbbBzVOv9C0otal1FO -- WafaStudies
-# 2. https://www.youtube.com/playlist?list=PLMWaZteqtEaLacN3eS3s8pw2jtwBVb1BH -- WafaStudies
+# 1. https://www.youtube.com/playlist?list=PLMWaZteqtEaLTJffbbBzVOv9C0otal1FO -- WafaStudies - DONE
+# 2. https://www.youtube.com/playlist?list=PLMWaZteqtEaLacN3eS3s8pw2jtwBVb1BH -- WafaStudies - DONE
 # 3. https://www.youtube.com/watch?v=JIJEL7M7Pv0&list=PLWf6TEjiiuICyhzYAnSshwQQy3hrH3eGw -- TechBrothersIT
 # 3. https://www.youtube.com/playlist?list=PLNRxk1s77zfjX_3ktp5sKsOh4Q2cWMMDX -- SS unitech
 # 4. https://www.youtube.com/watch?v=ZgYotyUrnxs&list=PL7ZG6NdDdT8N8sfWViyEdReWoR_JjBSu_ - databag
