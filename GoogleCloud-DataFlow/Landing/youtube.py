@@ -23,12 +23,13 @@ def download_playlist(url):
         print(f"Error: {e}")
 
 # Example usage:
-playlist_url = "https://www.youtube.com/playlist?list=PLMWaZteqtEaLTJffbbBzVOv9C0otal1FO"
+playlist_url = "https://www.youtube.com/playlist?list=PLMWaZteqtEaLacN3eS3s8pw2jtwBVb1BH"
 download_playlist(playlist_url)
 
 
-# 1. https://www.youtube.com/playlist?list=PLMWaZteqtEaLTJffbbBzVOv9C0otal1FO - Wafa studies
-# 2. https://www.youtube.com/playlist?list=PLNRxk1s77zfjX_3ktp5sKsOh4Q2cWMMDX - SS unitech
-# 3. https://www.youtube.com/watch?v=ZgYotyUrnxs&list=PL7ZG6NdDdT8N8sfWViyEdReWoR_JjBSu_ - databag
-# 4. https://www.youtube.com/playlist?list=PLsJW07-_K61KkcLWfb7D2sM3QrM8BiiYB - Annu Kumari
-# 
+# 1. https://www.youtube.com/playlist?list=PLMWaZteqtEaLTJffbbBzVOv9C0otal1FO -- WafaStudies
+# 2. https://www.youtube.com/playlist?list=PLMWaZteqtEaLacN3eS3s8pw2jtwBVb1BH -- WafaStudies
+# 3. https://www.youtube.com/watch?v=JIJEL7M7Pv0&list=PLWf6TEjiiuICyhzYAnSshwQQy3hrH3eGw -- TechBrothersIT
+# 3. https://www.youtube.com/playlist?list=PLNRxk1s77zfjX_3ktp5sKsOh4Q2cWMMDX -- SS unitech
+# 4. https://www.youtube.com/watch?v=ZgYotyUrnxs&list=PL7ZG6NdDdT8N8sfWViyEdReWoR_JjBSu_ - databag
+# 5. https://www.youtube.com/playlist?list=PLsJW07-_K61KkcLWfb7D2sM3QrM8BiiYB - Annu Kumari
