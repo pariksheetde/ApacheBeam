@@ -15,9 +15,9 @@
 # METHOD 2 : USING Dataflow 
 
 import os
-import apache_beam as beam
-from apache_beam.options.pipeline_options import PipelineOptions
-from apache_beam.io import WriteToBigQuery
+import apache_beam as beam # type: ignore 
+from apache_beam.options.pipeline_options import PipelineOptions # type: ignore
+from apache_beam.io import WriteToBigQuery # type: ignore
 import argparse
 import csv
 import datetime
@@ -63,7 +63,7 @@ class MyOptions(PipelineOptions):
             help = "Input GCS bucket to fetch CSV File"
         )
 def get_csv_reader(readable_file):
-    import apache_beam as beam
+    import apache_beam as beam # type: ignore
     import io
     import csv
     gcs_file = beam.io.filesystems.FileSystems.open(readable_file)
@@ -102,6 +102,6 @@ python locations.py --project admiral-1409 --region asia-south1 --runner DirectR
 DataflowRunner
 python locations.py --project admiral-1409 --region asia-south1 --runner DataflowRunner --no_use_public_ips --subnetwork https://www.googleapis.com/compute/beta/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-subnet --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/locations.csv
 
-python locations.py --project admiral-1409 --region asia-south1 --save_main_session --job_name locations --runner DataflowRunner --no_use_public_ips --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/locations.csv
+python locations.py --project admiral-1409 --region asia-south1 --subnetwork https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/subnet --job_name locations --runner DataflowRunner --no_use_public_ips --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/locations.csv
 
 """
