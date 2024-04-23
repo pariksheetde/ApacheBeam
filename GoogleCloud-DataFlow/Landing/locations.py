@@ -101,4 +101,7 @@ python locations.py --project admiral-1409 --region asia-south1 --runner DirectR
 """
 DataflowRunner
 python locations.py --project admiral-1409 --region asia-south1 --runner DataflowRunner --no_use_public_ips --subnetwork https://www.googleapis.com/compute/beta/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-subnet --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/locations.csv
+
+python locations.py --project admiral-1409 --region asia-south1 --save_main_session --job_name locations --runner DataflowRunner --no_use_public_ips --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/locations.csv
+
 """
