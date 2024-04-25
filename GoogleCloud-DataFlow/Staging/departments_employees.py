@@ -1,3 +1,19 @@
+# BELOW ARE THE LIBRARIES TO BE INSTALLED SEQUENTIALLY
+# pip install pandas
+# pip install apache_beam
+# pip install apache_beam[gcp]
+# pip install google-cloud-bigquery
+# pip install google-cloud-storage
+# TO AUTHENTICATE GOOGLE BUCKET FROM PYTHON USE BELOW CODE
+# gcloud auth application-default login
+# THIS SCRIPT IS USING python 3.8 version
+
+# AUTHOR : PARIKSHEET DE
+# DATE : 06-APR-2024
+# DESCRIPTION : THIS SCRIPT WILL READ FROM GOOGLE BIGQUERY AND LOAD INTO GOOGLE BIGQUERY
+# METHOD 1 : USING DirectRunner
+# METHOD 2 : USING Dataflow 
+
 from google.cloud import bigquery
 from google.cloud import storage
 import apache_beam as beam

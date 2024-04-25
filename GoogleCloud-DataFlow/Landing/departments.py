@@ -10,14 +10,14 @@
 
 # AUTHOR : PARIKSHEET DE
 # DATE : 06-APR-2024
-# DESCRIPTION : THIS SCRIPT WILL LOAD CSV FILE FROM GCS BUCKET INTO GOOGLE BIGQUERY
+# DESCRIPTION : THIS SCRIPT WILL LOAD departments CSV FILE FROM GCS BUCKET INTO GOOGLE BIGQUERY
 # METHOD 1 : USING DirectRunner
 # METHOD 2 : USING Dataflow 
 
 import os
-import apache_beam as beam # type: ignore
-from apache_beam.options.pipeline_options import PipelineOptions # type: ignore
-from apache_beam.io import WriteToBigQuery # type: ignore
+import apache_beam as beam 
+from apache_beam.options.pipeline_options import PipelineOptions
+from apache_beam.io import WriteToBigQuery 
 import argparse
 import csv
 import datetime
@@ -63,7 +63,7 @@ class MyOptions(PipelineOptions):
             help = "Input GCS bucket to fetch CSV File"
         )
 def get_csv_reader(readable_file):
-    import apache_beam as beam # type: ignore
+    import apache_beam as beam
     import io
     import csv
     gcs_file = beam.io.filesystems.FileSystems.open(readable_file)
