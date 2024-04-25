@@ -90,6 +90,7 @@ def dataflow(argv=None):
 
 if __name__=='__main__':
     logging.getLogger().setLevel(logging.INFO)
+    logging.info('Building Pipeline....')
     dataflow()
 
 """

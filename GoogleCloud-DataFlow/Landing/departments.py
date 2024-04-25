@@ -81,9 +81,9 @@ def dataflow(argv=None):
     results = (pl
                 | 'Create From CSV' >> beam.io.ReadFromText(my_options.inputBucket, skip_header_lines=1)
                 | 'Print' >> beam.Map(_logging)
-                | 'Converting From CSV to Dict' >> beam.ParDo(CSVtoDict(), ['EmpID', 'FName', 'LName', 'DeptID', 'HireDate', 'ManagerID'])
-                | 'Write To BQ' >> beam.io.WriteToBigQuery('admiral-1409:HRMS.employees',
-                                                            schema = 'EmpID:INTEGER, FName:STRING, LName:STRING, DeptID:INTEGER, HireDate:DATE, ManagerID:INTEGER, LoadTS:TIMESTAMP, User:STRING',
+                | 'Converting From CSV to Dict' >> beam.ParDo(CSVtoDict(), ['DeptID', 'DeptName'])
+                | 'Write To BQ' >> beam.io.WriteToBigQuery('admiral-1409:HRMS.departments',
+                                                            schema = 'DeptID:INTEGER, DeptName:STRING, LoadTS:TIMESTAMP, User:STRING',
                                                             write_disposition= beam.io.BigQueryDisposition.WRITE_TRUNCATE,
                                                             create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED)
                  )
@@ -96,5 +96,5 @@ if __name__=='__main__':
 
 """
 DirectRunner
-python employees.py --project admiral-1409 --region asia-south1 --runner DirectRunner --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/employees.csv
+python departments.py --project admiral-1409 --region asia-south1 --runner DirectRunner --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/departments.csv
 """
