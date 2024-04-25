@@ -14,10 +14,9 @@
 # METHOD 1 : USING DirectRunner
 # METHOD 2 : USING Dataflow 
 
-import os
-import apache_beam as beam # type: ignore 
-from apache_beam.options.pipeline_options import PipelineOptions # type: ignore
-from apache_beam.io import WriteToBigQuery # type: ignore
+import apache_beam as beam
+from apache_beam.options.pipeline_options import PipelineOptions
+from apache_beam.io import WriteToBigQuery
 import argparse
 import csv
 import datetime
@@ -63,7 +62,7 @@ class MyOptions(PipelineOptions):
             help = "Input GCS bucket to fetch CSV File"
         )
 def get_csv_reader(readable_file):
-    import apache_beam as beam # type: ignore
+    import apache_beam as beam
     import io
     import csv
     gcs_file = beam.io.filesystems.FileSystems.open(readable_file)
@@ -90,7 +89,7 @@ def dataflow(argv=None):
     pl.run().wait_until_finish()
 
 if __name__=='__main__':
-    # logging.getLogger().setLevel(logging.info)
+    logging.getLogger().setLevel(logging.INFO)
     dataflow()
 
 """
@@ -100,8 +99,5 @@ python locations.py --project admiral-1409 --region asia-south1 --runner DirectR
 
 """
 DataflowRunner
-python locations.py --project admiral-1409 --region asia-south1 --runner DataflowRunner --no_use_public_ips --subnetwork https://www.googleapis.com/compute/beta/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-subnet --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/locations.csv
-
-python locations.py --project admiral-1409 --region asia-south1 --subnetwork https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/subnet --job_name locations --runner DataflowRunner --no_use_public_ips --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/locations.csv
-
+python locations.py --project admiral-1409 --region asia-south1 --no_use_public_ips --subnetwork https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-svps --job_name locations --runner DataflowRunner --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/locations.csv
 """
