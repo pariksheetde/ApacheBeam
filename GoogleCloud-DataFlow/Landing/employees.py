@@ -90,7 +90,7 @@ def dataflow(argv=None):
     pl.run().wait_until_finish()
 
 if __name__=='__main__':
-    # logging.getLogger().setLevel(logging.info)
+    logging.getLogger().setLevel(logging.INFO)
     dataflow()
 
 """
