@@ -49,7 +49,9 @@ def main():
     d.deptid,
     d.DeptName,
     e.FName,
-    e.LName
+    e.LName,
+    current_timestamp() AS LoadTS,
+    'ORACLE' AS User
     FROM admiral-1409.HRMS.departments d INNER JOIN admiral-1409.HRMS.employees e
     ON d.deptid = e.deptid
     """
