@@ -98,3 +98,7 @@ if __name__=='__main__':
 DirectRunner
 python departments.py --project admiral-1409 --region asia-south1 --runner DirectRunner --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/departments.csv
 """
+
+"""
+python departments.py --project admiral-1409 --region asia-south1 --machine_type n2-custom-6-3072 --no_use_public_ips --subnetwork https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-svps --job_name departments --runner DataflowRunner --service_account_email dataflow@admiral-1409.iam.gserviceaccount.com --temp_location gs://hrms-adm/utilities/temp --staging_location gs://hrms-adm/utilities/staging --inputBucket gs://hrms-adm/src/departments.csv
+"""

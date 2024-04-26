@@ -66,7 +66,7 @@ def main():
     
     load_dept_employees = (load_dept_employees_load
                            | "Write To BQ" >> beam.io.WriteToBigQuery(
-                               table = 'admiral-1409.HRMS.DeptEmployees',
+                               table = 'admiral-1409.Staging.DeptEmpAssociates',
                                create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
                                write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE
                            ))
