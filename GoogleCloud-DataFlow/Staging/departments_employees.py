@@ -36,7 +36,7 @@ def main():
 
     beam_options = PipelineOptions(
     beam_args,
-    runner = 'DirectRunner',
+    # runner = 'DirectRunner',
     project='admiral-1409',
     staging_location= 'gs://hrms-adm/utilities/staging',
     temp_location = 'gs://hrms-adm/utilities/temp',
@@ -81,4 +81,8 @@ if __name__=='__main__':
 """
 DirectRunner
 python departments_employees.py
+"""
+
+"""
+python departments_employees.py --machine_type n2-custom-6-3072 --no_use_public_ips --subnetwork https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-svps --job_name deptemp --runner DataflowRunner
 """
