@@ -46,12 +46,12 @@ def main():
 
     qry = """
     SELECT
-    d.deptid,
-    d.DeptName,
+    e.EmpId,
     e.FName,
     e.LName,
-    current_timestamp() AS LoadTS,
-    'ORACLE' AS User
+    d.deptid AS DeptId,
+    d.DeptName,
+    current_timestamp() AS LoadTS
     FROM admiral-1409.HRMS.departments d INNER JOIN admiral-1409.HRMS.employees e
     ON d.deptid = e.deptid
     """
