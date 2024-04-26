@@ -36,7 +36,11 @@ def main():
 
     beam_options = PipelineOptions(
     beam_args,
-    # runner = 'DirectRunner',
+    runner = 'DirectRunner',
+    # runner = 'DataflowRunner',
+    # use_public_ips = False,
+    # subnetwork = 'https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-svps',
+    # machine_type = 'n2-custom-6-3072',
     project='admiral-1409',
     staging_location= 'gs://hrms-adm/utilities/staging',
     temp_location = 'gs://hrms-adm/utilities/temp',
@@ -44,7 +48,7 @@ def main():
     service_account_email = 'dataflow@admiral-1409.iam.gserviceaccount.com'
     )
 
-    qry = """
+    dept_emp_associates = """
     SELECT
     e.EmpId,
     e.FName,
@@ -60,7 +64,7 @@ def main():
     
     logging.info('Reading From BQ and Loading into BQ')
 
-    load_dept_employees_load = (p | "Read From BQ">>beam.io.ReadFromBigQuery(query= qry,
+    load_dept_employees_load = (p | "Read From BQ">>beam.io.ReadFromBigQuery(query= dept_emp_associates,
                            use_standard_sql = True) | "print valid data" >>beam.Map(_logging)
                            )
     
