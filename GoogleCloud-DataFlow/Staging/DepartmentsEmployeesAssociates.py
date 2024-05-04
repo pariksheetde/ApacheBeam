@@ -39,6 +39,7 @@ def main():
     # runner = 'DirectRunner',
     runner = 'DataflowRunner',
     use_public_ips = False,
+    job_name = 'deptemp-df',
     subnetwork = 'https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-svps',
     machine_type = 'n2-custom-6-3072',
     project='admiral-1409',
