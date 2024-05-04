@@ -36,11 +36,11 @@ def main():
 
     beam_options = PipelineOptions(
     beam_args,
-    runner = 'DirectRunner',
-    # runner = 'DataflowRunner',
-    # use_public_ips = False,
-    # subnetwork = 'https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-svps',
-    # machine_type = 'n2-custom-6-3072',
+    # runner = 'DirectRunner',
+    runner = 'DataflowRunner',
+    use_public_ips = False,
+    subnetwork = 'https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-svps',
+    machine_type = 'n2-custom-6-3072',
     project='admiral-1409',
     staging_location= 'gs://hrms-adm/utilities/staging',
     temp_location = 'gs://hrms-adm/utilities/temp',
@@ -88,5 +88,5 @@ python DepartmentsEmployeesAssociates.py
 """
 
 """
-python DepartmentsEmployeesAssociates.py --machine_type n2-custom-6-3072 --no_use_public_ips --subnetwork https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-svps --job_name deptemp-df --runner DataflowRunner
+python DepartmentsEmployeesAssociates.py --project admiral-1409 --region asia-south1 --machine_type n2-custom-6-3072 --no_use_public_ips --subnetwork https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-svps --job_name deptemp-df --runner DataflowRunner
 """
