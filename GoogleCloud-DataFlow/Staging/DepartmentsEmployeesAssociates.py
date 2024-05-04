@@ -84,9 +84,9 @@ if __name__=='__main__':
 
 """
 DirectRunner
-python departments_employees.py
+python DepartmentsEmployeesAssociates.py
 """
 
 """
-python departments_employees.py --machine_type n2-custom-6-3072 --no_use_public_ips --subnetwork https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-svps --job_name deptemp --runner DataflowRunner
+python DepartmentsEmployeesAssociates.py --machine_type n2-custom-6-3072 --no_use_public_ips --subnetwork https://www.googleapis.com/compute/v1/projects/admiral-1409/regions/asia-south1/subnetworks/dataflow-svps --job_name deptemp-df --runner DataflowRunner
 """
